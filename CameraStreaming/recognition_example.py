@@ -10,10 +10,10 @@ while(True):
 
    hsv = cv.blur(hsv, (5, 5))
 
-   lower = np.array([119, 101, 73])
-   upper = np.array([255, 255, 255])
+   lower = np.array([0, 100, 100])
+   upper = np.array([129, 255, 255])
    thresh = cv.inRange(hsv, lower, upper)
-
+   cv.imshow("test", thresh)
    thresh = cv.erode(thresh, None, iterations=2)
    thresh = cv.dilate(thresh, None, iterations=4)
 
