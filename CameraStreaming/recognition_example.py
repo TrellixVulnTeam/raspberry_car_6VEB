@@ -3,13 +3,11 @@ import cv2 as cv
 
 cap = cv.VideoCapture(0)
 
-while(True):
+while True:
    ret, frame = cap.read()
-   print (ret)
+   print(ret)
    hsv = cv.cvtColor(frame, cv.COLOR_BGR2HSV)
-
    hsv = cv.blur(hsv, (5, 5))
-
    lower = np.array([119, 101, 73])
    upper = np.array([255, 255, 255])
    thresh = cv.inRange(hsv, lower, upper)
