@@ -45,7 +45,7 @@ while(1):
 
 
 
-    cv.imshow('result',result)
+    cv.imshow('result',mask)
 
     k = cv.waitKey(5) & 0xFF
     if k == 27:
