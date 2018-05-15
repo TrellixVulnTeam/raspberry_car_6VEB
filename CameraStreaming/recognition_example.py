@@ -2,7 +2,7 @@ import numpy as np
 import cv2 as cv
 
 cap = cv.VideoCapture(0)
-
+lst = ["a_unevenness", "main_road", "no_drive", "no_entry", "parking", "pedistrain", "road_works", "stop", "way_out"]
 while(True):
    ret, frame = cap.read()
    print (ret)
@@ -34,21 +34,20 @@ while(True):
 
       if roiImg.any():
          cv.imshow('roiImg', roiImg)
+         for i in lst:
+             noDrive = cv.imread("/home/user/Desktop/raspberry_car/signs/"+i+".png")
+             resizedRoi = cv.resize(roiImg, (100, 100))
+             noDrive=cv.resize(noDrive,(100, 100))
 
-         noDrive = cv.imread("noDrive.png")
+             xresizedRoi=cv.inRange(resizedRoi, lower, upper)
+             xnoDrive=cv.inRange(noDrive, lower, upper)
 
-         resizedRoi = cv.resize(roiImg, (100, 100))
-         noDrive=cv.resize(noDrive,(100, 100))
-
-         xresizedRoi=cv.inRange(resizedRoi, lower, upper)
-         xnoDrive=cv.inRange(noDrive, lower, upper)
-
-         identity_percent=0
-         for i in range(100):
-            for j in range(100):
-               if (xresizedRoi[i][j]==xnoDrive[i][j]):
-                  identity_percent=identity_percent+1
-         print (identity_percent)
+             identity_percent=0
+             for i in range(100):
+                for j in range(100):
+                   if (xresizedRoi[i][j]==xnoDrive[i][j]):
+                      identity_percent=identity_percent+1
+             print (identity_percent)
 
    cv.imshow('frame', frame)
 
